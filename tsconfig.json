@@ -20,7 +20,7 @@
     "moduleResolution": "node",
 
     // для абсолютного пути
-    "baseUrl": "./",
+    // "baseUrl": "./",
 
     // Если какая-либо библиотека не имеет default import,
     // лоадеры вроде ts-loader или babel-loader автоматически создают их

@@ -1,11 +1,11 @@
 import webpack from "webpack";
-import path from "path";
 
 import { BuildOptions } from "./types/config";
 
 import { buildPlugins } from "./build-plugins";
 import { buildLoaders } from "./build-loaders";
 import { buildResolvers } from "./build-resolvers";
+import { buildDevServer } from "./build-dev-server";
 
 export function buildWebpackConfig(
   options: BuildOptions,
@@ -56,5 +56,14 @@ export function buildWebpackConfig(
     // настройка разрешений модулей
     // например, можно настроить alias или возможность не указывать расширения файлов
     resolve: buildResolvers(),
+
+    // sourse map для отслеживания файлов, в которых была допущена ошибка
+    // например, есть файлы a.js, b.js и c.js
+    // при компиляции все объединяется в один файл bundle.js
+    // если допустили ошибку, скажем, в a.js, то без inline-source-map будет указывать
+    // что ошибка была допущена в bundle.js
+    devtool: options.mode === "development" ? "inline-source-map" : false,
+
+    devServer: buildDevServer(options),
   };
 }
