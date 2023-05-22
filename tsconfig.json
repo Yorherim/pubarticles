@@ -19,6 +19,9 @@
     "allowJs": true,
     "moduleResolution": "node",
 
+    // для абсолютного пути
+    "baseUrl": "./",
+
     // Если какая-либо библиотека не имеет default import,
     // лоадеры вроде ts-loader или babel-loader автоматически создают их
     // вместо такого импорта import * as React from 'react';
