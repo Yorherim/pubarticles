@@ -10,7 +10,7 @@ export default (env: BuildEnv) => {
     paths: {
       html: path.resolve(__dirname, "public", "index.html"),
       build: path.resolve(__dirname, "dist"),
-      entry: path.resolve(__dirname, "src", "index.ts"),
+      entry: path.resolve(__dirname, "src", "index.tsx"),
     },
     port: env.port || 3000,
   });

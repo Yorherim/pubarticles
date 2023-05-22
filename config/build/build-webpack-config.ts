@@ -20,7 +20,7 @@ export function buildWebpackConfig(
     // можно entry делать так
     // entry: {
     //   // файл в dist будет называться random при использования шаблона [name] в output
-    //   random: path.resolve(__dirname, 'src', 'index.ts'),
+    //   random: path.resolve(__dirname, 'src', 'index.tsx'),
     // },
 
     // настройка куда и как будет происходить сборка приложения
