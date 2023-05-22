@@ -1,5 +1,6 @@
 import webpack from "webpack";
 import HTMLWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import { BuildOptions } from "./types/config";
 
@@ -16,6 +17,12 @@ export function buildPlugins({
       // шаблон для html файла
       // нужно чтобы html файл создавался с div.root
       template: paths.html,
+    }),
+
+    // выносит css код в отдельные файлы
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[contenthash:8].css",
+      chunkFilename: "css/[name].[contenthash:8].css",
     }),
   ];
 }

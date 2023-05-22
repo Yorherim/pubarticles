@@ -1,33 +1,52 @@
 import webpack from "webpack";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-export function buildLoaders(): webpack.RuleSetRule[] {
+import { BuildOptions } from "./types/config";
+
+export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
   // в поле test указываем рег. выражение, по которому нужно найти файл с необходимым расширением
   // в поле use указываем какой loader необходимо использовать
   // exclude - исключения
 
-  // если не используем typescript - нужен babel-loader для использования jsx
-  const typescriptLoader = {
-    test: /\.tsx?$/,
-    use: "ts-loader",
-    exclude: /node_modules/,
+  // общее использование для css и scss loader
+  const cssLoaderUse: (string | webpack.RuleSetRule)[] = [
+    options.mode === "development"
+      ? "style-loader"
+      : MiniCssExtractPlugin.loader,
+    {
+      loader: "css-loader",
+      options: {
+        modules: {
+          // проверяет, есть ли в названии .module.
+          // если есть, то задает ему уникальный хэш
+          auto: /\.module./gm,
+
+          // каким образом будет хэшироваться
+          localIdentName:
+            options.mode === "development"
+              ? "[path][name]__[local]--[hash:base64:5]"
+              : "[hash:base64:8]",
+        },
+      },
+    },
+  ];
+
+  const loaders: Record<string, webpack.RuleSetRule> = {
+    // если не используем typescript - нужен babel-loader для использования jsx
+    typescript: {
+      test: /\.tsx?$/,
+      use: "ts-loader",
+      exclude: /node_modules/,
+    },
+    css: {
+      test: /\.css$/i,
+      use: cssLoaderUse,
+    },
+    scss: {
+      test: /\.s[ac]ss$/i,
+      use: [...cssLoaderUse, "sass-loader"],
+    },
   };
 
-  const cssLoader = {
-    test: /\.css$/i,
-    use: ["style-loader", "css-loader"],
-  };
-
-  const scssLoader = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      // Creates `style` nodes from JS strings
-      "style-loader",
-      // Translates CSS into CommonJS
-      "css-loader",
-      // Compiles Sass to CSS
-      "sass-loader",
-    ],
-  };
-
-  return [typescriptLoader, cssLoader, scssLoader];
+  return [...Object.values(loaders)];
 }

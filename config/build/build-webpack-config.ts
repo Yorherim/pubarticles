@@ -50,7 +50,7 @@ export function buildWebpackConfig(
 
     // здесь настраиваем loaders - обрабатывает файлы, которые не являются .js или json
     module: {
-      rules: buildLoaders(),
+      rules: buildLoaders(options),
     },
 
     // настройка разрешений модулей
