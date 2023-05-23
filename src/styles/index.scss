@@ -1,0 +1,19 @@
+@import "./reset";
+
+// =============== VARIABLES ===============
+@import "./variables/global";
+// =============== VARIABLES ===============
+
+// =============== THEMES ===============
+@import "./themes/light";
+@import "./themes/dark";
+// =============== THEMES ===============
+
+.app {
+  font: var(--font-m);
+
+  background: var(--bg-color);
+  color: var(--primary-color);
+
+  height: 100vh;
+}

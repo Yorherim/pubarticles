@@ -3,13 +3,18 @@ import { Suspense } from "react";
 
 import { MainPageAsync } from "./pages/main/main-page.async";
 import { AboutPageAsync } from "./pages/about/about-page.async";
+import { useTheme } from "./theme/useTheme";
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <div className={"app"}>
+    <div className={`app ${theme}`}>
       <Link to={"/"}>main</Link>
       <br />
       <Link to={"/about"}>About</Link>
+      <br />
+      <button onClick={toggleTheme}>toggle theme</button>
 
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
