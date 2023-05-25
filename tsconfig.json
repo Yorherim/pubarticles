@@ -19,8 +19,10 @@
     "moduleResolution": "node",
 
     // для абсолютного пути
-    // "baseUrl": "./",
-
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*"]
+    },
     // Если какая-либо библиотека не имеет default import,
     // лоадеры вроде ts-loader или babel-loader автоматически создают их
     // вместо такого импорта import * as React from 'react';
@@ -33,7 +35,7 @@
     // console.log(Moment);
     // без флага esModuleInterop результат undefined
     // c флагом результат [object Object]
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "ts-node": {
     "compilerOptions": {

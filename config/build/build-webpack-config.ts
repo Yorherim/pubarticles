@@ -55,7 +55,7 @@ export function buildWebpackConfig(
 
     // настройка разрешений модулей
     // например, можно настроить alias или возможность не указывать расширения файлов
-    resolve: buildResolvers(),
+    resolve: buildResolvers(options),
 
     // sourse map для отслеживания файлов, в которых была допущена ошибка
     // например, есть файлы a.js, b.js и c.js
