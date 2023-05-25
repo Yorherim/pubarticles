@@ -10,8 +10,8 @@
  */
 export function classNames(
   mainClassName: string,
-  mods: Record<string, boolean | string>,
-  additional: string[],
+  mods?: Record<string, boolean | string>,
+  additional?: string[],
 ): string {
   return [
     mainClassName,
